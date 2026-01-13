@@ -609,18 +609,29 @@ function getTabKey(tab: RouteLocationNormalized | RouteRecordNormalized) {
     fullPath,
     path,
     meta: { fullPathKey } = {},
+    name,
     query = {},
   } = tab as RouteLocationNormalized;
+
   // pageKey可能是数组（查询参数重复时可能出现）
   const pageKey = Array.isArray(query.pageKey)
     ? query.pageKey[0]
     : query.pageKey;
+
   let rawKey;
   if (pageKey) {
     rawKey = pageKey;
   } else {
-    rawKey = fullPathKey === false ? path : (fullPath ?? path);
+    // 对于微应用路由，使用基础路径作为key，避免动态路径变化导致重复标签页
+    // 匹配以/microapp/开头的路由
+    if (path.includes('/microapp/') || name === 'MicroApp') {
+      // 只使用基础路径（不包含动态参数部分）
+      rawKey = path.split('/').slice(0, 4).join('/');
+    } else {
+      rawKey = fullPathKey === false ? path : (fullPath ?? path);
+    }
   }
+
   try {
     return decodeURIComponent(rawKey);
   } catch {

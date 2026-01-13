@@ -44,6 +44,7 @@
     "dayjs": "catalog:",
     "element-plus": "catalog:",
     "pinia": "catalog:",
+    "qiankun": "^2.10.16",
     "vue": "catalog:",
     "vue-router": "catalog:"
   },

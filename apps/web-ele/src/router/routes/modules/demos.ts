@@ -29,6 +29,27 @@ const routes: RouteRecordRaw[] = [
         path: '/demos/form',
         component: () => import('#/views/demos/form/basic.vue'),
       },
+      {
+        meta: {
+          icon: () => null,
+          title: '子应用',
+        },
+        name: 'MicroAppRoot',
+        path: '/demos/microapp',
+        children: [
+          {
+            meta: {
+              title: 'vue3',
+              link: '/demos/microapp/vue3', // 指定菜单链接
+              activePath: '/demos/microapp/vue3', // 添加激活路径，解决菜单高亮问题
+            },
+            name: 'MicroAppVue3',
+            path: '/demos/microapp/vue3/:pathMatch(.*)*',
+            component: () =>
+              import('#/micro-app/components/SubAppContainer.vue'),
+          },
+        ],
+      },
     ],
   },
 ];
