@@ -49,7 +49,7 @@ catalogs:
       specifier: ^2.6.2
       version: 2.7.6
     '@manypkg/get-packages':
-      specifier: ^3.0.0
+      specifier: ^3.1.0
       version: 3.1.0
     '@nolebase/vitepress-plugin-git-changelog':
       specifier: ^2.18.0
